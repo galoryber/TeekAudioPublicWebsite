@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Custom tube amps",
+    "image": "amp-bench.jpg",
+    "summary": "Bespoke amplifiers built around the sound you are chasing.",
+    "body": "We work closely with you to design and build an amplifier that matches your style, your preferences, and your ear. Warm bluesy tones, searing rock overdrive, clean jazz clarity — each amp is tailored to the player it is built for."
+  },
+  {
+    "name": "Tube amp repairs",
+    "image": "amp-internals.jpg",
+    "summary": "Diagnosis and revival for gear that has seen better days.",
+    "body": "Our technicians diagnose and repair tube amplifiers so they perform at their peak once more — everything from routine maintenance and re-tubing to complex faults in vintage circuits."
+  },
+  {
+    "name": "Residential",
+    "image": "tubes-glowing.jpg",
+    "summary": "Vintage warmth for your own listening room.",
+    "body": "Amplifier repairs, maintenance, and custom modifications tailored to a personal audio space. If you have built a listening room, we will help it sound the way you imagined."
+  },
+  {
+    "name": "Commercial",
+    "image": "amp-rack.jpg",
+    "summary": "Amplification for venues and studios.",
+    "body": "We maintain and enhance amplification systems for venues, recording studios, and other commercial spaces, so what your audience hears is worth hearing."
+  }
+]
