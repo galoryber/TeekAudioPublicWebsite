@@ -32,10 +32,10 @@ generated, not committed.
 
 ## Heads up
 
-The phone number and email address in `content/site.json` are **placeholders**
-inherited from the old WordPress theme. They are deliberately excluded from the
-site's structured data and flagged on the contact page until real details arrive.
-See `CLAUDE.md`.
+There is **no phone number** on this site. The one in the old WordPress theme was a
+placeholder (`+1-800-123-4567`) and was removed rather than published. Contact is by
+email only until the client supplies a real number — at which point adding
+`phone_display` and `phone_href` to `content/site.json` is all that is needed.
 
 ## Deployment
 

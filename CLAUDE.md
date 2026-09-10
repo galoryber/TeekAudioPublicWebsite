@@ -21,25 +21,20 @@ serves the directory as-is. Don't copy that pattern over; it isn't needed when
 the runner does the build, and it means a JSON edit from github.com or a phone
 is enough to publish.
 
-## Contact details are placeholders — read this before touching them
+## There is deliberately no phone number
 
-`+1-800-123-4567` and `info@teekaudio.com` in `content/site.json` are **not real**.
-They came from the original WordPress theme. The client knows and is expected to
-supply real details; until then the placeholders ship deliberately.
+The `+1-800-123-4567` inherited from the WordPress theme was a placeholder, not a
+real line, and it has been **removed entirely** rather than published. A fake number
+on a live business site invites real calls to nowhere, and if it reaches structured
+data it propagates into Google Business and map listings, which is hard to retract.
 
-Two guards exist because of this, and both must stay:
+`info@teekaudio.com` is the only contact route, via `mailto:`. That address is on a
+domain the client controls with Microsoft 365 mail, so it is real.
 
-1. `contact_details_are_placeholders: true` in `site.json` **omits phone and email
-   from the LocalBusiness JSON-LD**. Publishing a fake phone number as structured
-   data feeds it to Google Business listings and map providers, which is much
-   harder to walk back than a line of page text.
-2. The contact page renders a visible note saying the details are not yet live.
-
-When the real details arrive: replace the values, set the flag to `false`, and
-delete the `PLACEHOLDER_NOTE` key. Both guards then switch off on their own.
-
-**Do not invent a phone number or email.** If asked to make the site look
-finished, leave these alone and say why.
+**Do not invent a phone number.** When the client supplies one, add `phone_display`
+and `phone_href` to `content/site.json` — `build.py` renders the contact row and adds
+`telephone` to the JSON-LD only when those keys are present, so adding them is all
+that is required.
 
 ## Content
 

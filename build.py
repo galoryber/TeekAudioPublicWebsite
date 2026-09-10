@@ -55,12 +55,12 @@ def layout(*, site, title, description, path, body):
         "address": {"@type": "PostalAddress", "addressLocality": "Fond du Lac",
                     "addressRegion": "WI", "addressCountry": "US"},
     }
-    # Contact details are placeholders until the client supplies real ones. Publishing
-    # them as structured data would feed a fake phone number to search engines and
-    # map listings, which is far harder to walk back than a line of page text.
-    if not site.get("contact_details_are_placeholders"):
-        jsonld["telephone"] = site["phone_href"]
+    # There is deliberately no phone number on this site — see CLAUDE.md. Only
+    # publish contact fields that are actually real.
+    if site.get("email"):
         jsonld["email"] = site["email"]
+    if site.get("phone_href"):
+        jsonld["telephone"] = site["phone_href"]
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -258,13 +258,6 @@ def page_services(site, services):
 
 
 def page_contact(site):
-    placeholder_notice = ""
-    if site.get("contact_details_are_placeholders"):
-        placeholder_notice = """
-          <p class="notice"><strong>Note:</strong> these contact details are
-          placeholders and are not yet live. Replace them in
-          <code>content/site.json</code> before this site goes to production.</p>"""
-
     body = f"""    <div class="page-head">
       <div class="wrap">
         <p class="eyebrow">Contact</p>
@@ -280,10 +273,6 @@ def page_contact(site):
           <div>
             <ul class="contact-list">
               <li>
-                <span class="label">Phone</span>
-                <span class="value"><a href="tel:{e(site["phone_href"])}">{e(site["phone_display"])}</a></span>
-              </li>
-              <li>
                 <span class="label">Email</span>
                 <span class="value"><a href="mailto:{e(site["email"])}">{e(site["email"])}</a></span>
               </li>
@@ -292,7 +281,6 @@ def page_contact(site):
                 <span class="value">{e(site["hometown"])}</span>
               </li>
             </ul>
-{placeholder_notice}
           </div>
           <div>
             <h2 style="font-family:var(--display);font-weight:700;font-size:1.2rem;margin:0 0 12px">
@@ -370,8 +358,8 @@ def build():
 
     print(f"Built -> {DIST}")
     print(f"  {len(services)} services")
-    if site.get("contact_details_are_placeholders"):
-        print("  note: contact details are PLACEHOLDERS — omitted from structured data")
+    if not site.get("phone_href"):
+        print("  note: no phone number published (none supplied by the client)")
 
 
 if __name__ == "__main__":

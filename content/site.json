@@ -4,29 +4,35 @@
   "description": "Teek Audio builds custom tube amplifiers and repairs vintage and modern gear from Fond du Lac, Wisconsin.",
   "url": "https://www.teekaudio.com",
   "hometown": "Fond du Lac, Wisconsin",
-
-  "phone_display": "+1-800-123-4567",
-  "phone_href": "+18001234567",
   "email": "info@teekaudio.com",
-
-  "PLACEHOLDER_NOTE": "phone_display, phone_href and email are PLACEHOLDERS awaiting real details from the client. See CLAUDE.md. Do not present them as verified.",
-  "contact_details_are_placeholders": true,
-
   "intro_heading": "Your tube amp experts",
   "intro_lede": "At Teek Audio, we live and breathe tube amps. From vintage classics to modern marvels, we have the knowledge, skill, and patience to handle them all.",
-
   "about": [
     "At Teek Audio, we are your trusted experts in tube amplifiers. Our services encompass custom tube amp creations that match your unique style, repairs that revive cherished gear, and specialized solutions for both residential and commercial settings.",
     "Founded in the heart of Fond du Lac, Wisconsin, Teek Audio is the work of a team with a strong background in electrical engineering and an unwavering passion for music. Our journey began with a vision to bring innovative design and careful craftsmanship to tube amplification.",
     "That fusion of technical expertise and artistic flair goes into every project we take on. A deep understanding of tube circuits lets us master the nuances of vintage amplifiers and push the boundaries of modern amplification alike.",
     "We don't just build amplifiers. We build the sound you have been hearing in your head."
   ],
-
   "why_us": [
-    ["Passion and precision", "Every build is driven by a genuine love for tube amps and a commitment to the highest-quality workmanship."],
-    ["Built for you", "Each custom amp is a reflection of one player's sonic identity, not a production run."],
-    ["Real expertise", "A deep understanding of tube technology behind every repair and modification."],
-    ["Straight answers", "We work closely with you to understand what you need, and we tell you what it will take."],
-    ["Quality assurance", "Premium components and rigorous testing, so the work lasts."]
+    [
+      "Passion and precision",
+      "Every build is driven by a genuine love for tube amps and a commitment to the highest-quality workmanship."
+    ],
+    [
+      "Built for you",
+      "Each custom amp is a reflection of one player's sonic identity, not a production run."
+    ],
+    [
+      "Real expertise",
+      "A deep understanding of tube technology behind every repair and modification."
+    ],
+    [
+      "Straight answers",
+      "We work closely with you to understand what you need, and we tell you what it will take."
+    ],
+    [
+      "Quality assurance",
+      "Premium components and rigorous testing, so the work lasts."
+    ]
   ]
 }
