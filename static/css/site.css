@@ -66,7 +66,10 @@ body {
   overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
+/* height:auto is load-bearing. Without it, an <img> carrying a height attribute
+   keeps that exact pixel height while max-width shrinks its width — which
+   silently distorts the picture. */
+img { max-width: 100%; height: auto; display: block; }
 a { color: var(--amber-bright); text-underline-offset: 3px; }
 a:hover { color: var(--amber); }
 :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
@@ -234,7 +237,13 @@ a:hover { color: var(--amber); }
 /* ---------- split ---------- */
 
 .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 44px; align-items: center; }
-.split img { border-radius: var(--radius-lg); border: 1px solid var(--line); }
+.split img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+}
 
 /* ---------- contact ---------- */
 

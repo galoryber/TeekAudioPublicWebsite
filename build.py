@@ -14,6 +14,7 @@ import datetime as dt
 import html
 import json
 import shutil
+import struct
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -35,6 +36,36 @@ def e(text) -> str:
 def write(path: Path, text: str):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
+
+
+def jpeg_size(path: Path) -> tuple[int, int]:
+    """Read a JPEG's real dimensions from its header. Standard library only.
+
+    Hardcoding width/height in the templates got them wrong for three images and
+    caused a visibly stretched photo on the About page, so they are measured.
+    """
+    data = path.read_bytes()
+    i = 2
+    while i < len(data) - 9:
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+                      0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+            h, w = struct.unpack(">HH", data[i + 5:i + 9])
+            return w, h
+        if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
+            i += 2
+            continue
+        i += 2 + struct.unpack(">H", data[i + 2:i + 4])[0]
+    raise ValueError(f"could not read dimensions from {path}")
+
+
+def img_dims(filename: str) -> str:
+    """`width="..." height="..."` for an image in static/img/."""
+    w, h = jpeg_size(STATIC / "img" / filename)
+    return f'width="{w}" height="{h}"'
 
 
 def layout(*, site, title, description, path, body):
@@ -138,7 +169,7 @@ def cta(site):
 
 def page_home(site, services):
     cards = "\n".join(f"""        <article class="card">
-          <img src="/img/{e(s["image"])}" alt="" loading="lazy" width="1600" height="1067">
+          <img src="/img/{e(s["image"])}" alt="" loading="lazy" {img_dims(s["image"])}>
           <div class="card-body">
             <h3>{e(s["name"])}</h3>
             <p class="summary">{e(s["summary"])}</p>
@@ -153,7 +184,7 @@ def page_home(site, services):
 
     body = f"""    <section class="hero">
       <div class="hero-bg">
-        <img src="/img/hero-tubes.jpg" alt="" fetchpriority="high" width="2400" height="1631">
+        <img src="/img/hero-tubes.jpg" alt="" fetchpriority="high" {img_dims("hero-tubes.jpg")}>
       </div>
       <div class="wrap">
         <p class="eyebrow">Fond du Lac, Wisconsin</p>
@@ -212,7 +243,7 @@ def page_about(site):
 {paras}
           </div>
           <img src="/img/tubes-blue.jpg" alt="Vacuum tubes glowing in a darkened amplifier chassis"
-               loading="lazy" width="1600" height="951">
+               loading="lazy" {img_dims("tubes-blue.jpg")}>
         </div>
       </div>
     </section>
@@ -226,7 +257,7 @@ def page_about(site):
 
 def page_services(site, services):
     cards = "\n".join(f"""        <article class="card">
-          <img src="/img/{e(s["image"])}" alt="" loading="lazy" width="1600" height="1067">
+          <img src="/img/{e(s["image"])}" alt="" loading="lazy" {img_dims(s["image"])}>
           <div class="card-body">
             <h3>{e(s["name"])}</h3>
             <p class="summary">{e(s["summary"])}</p>
